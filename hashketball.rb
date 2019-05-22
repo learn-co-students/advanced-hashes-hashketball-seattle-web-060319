@@ -42,8 +42,8 @@ end
 
 def num_points_scored(name)
   game_hash.each do |team, attributes|
-    attributes.each do |attribute, players|
-      players.each do |player, stats|
+    attributes.each do |attribute, definition|
+      definition.each do |player, stats|
         binding.pry 
         stats.each do |points|
           if points == :points
