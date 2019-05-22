@@ -126,14 +126,53 @@ def shoe_size(name)
   stats.fetch(:shoe)
 end
 
+
 def team_colors(name)
-  game_hash.map do |location, details|
+  answer = ""
+  game_hash.each do |location, details|
     if details[:team_name] == name
-      details[:colors]
+      answer = details[:colors]
     end
   end
+  answer
 end
 
+def team_names
+  new_array = []
+  game_hash.each do |location, details|
+    new_array.push(details[:team_name])
+  end
+  new_array
+end
+
+
+def player_numbers(name)
+  new_array = []
+  game_hash.each do |location, details|
+    if details[:team_name] == name
+      details[:players].each do |player, stat|
+        new_array.push(stat[:number])
+      end
+    end
+  end
+  new_array
+end
+
+      
+def player_stats(name)
+  new_hash = {}
+  game_hash.each do |location, details|
+    details.each do |team_info, particular|
+      if particular == name
+        particular.each do |player|
+          new_hash = particular[name]
+        end
+      end
+    end
+  end
+  new_hash
+end
+        
 
 
 
