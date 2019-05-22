@@ -1,6 +1,6 @@
 game_hash = {
   {:home => 
-    {:team_name => "Brooklyn Nets", :colors => ["Black", "White"], :players => [
+    [{:team_name => "Brooklyn Nets", :colors => ["Black", "White"], :players => [
         {"Alan Anderson" => 
           {:number => "0", :shoe => "16", :points => "22",:rebounds => "12", :assists => "12", :steals => "3", :blocks => "1",:slam_dunks => "1"}
         },
@@ -35,7 +35,7 @@ game_hash = {
         {"Brendan Haywood" => 
            {:number => "33",:shoe => "15",:points => "6",:rebounds => "12",:assists => "12",:steals => "22",:blocks => "5",:slam_dunks => "12"}
         }]
-    }
+    }]
 }
 
 
