@@ -1,6 +1,8 @@
-game_hash = {
-  {:home => 
-    [{:team_name => "Brooklyn Nets", :colors => ["Black", "White"], :players => [
+require 'pry'
+def game_hash
+   {
+  :home => 
+    {:team_name => "Brooklyn Nets", :colors => ["Black", "White"], :players => [
         {"Alan Anderson" => 
           {:number => "0", :shoe => "16", :points => "22",:rebounds => "12", :assists => "12", :steals => "3", :blocks => "1",:slam_dunks => "1"}
         },
@@ -16,9 +18,8 @@ game_hash = {
         {"Jason Terry" => 
            {:number => "31",:shoe => "15",:points => "19",:rebounds => "2",:assists => "2",:steals => "4",:blocks => "11",:slam_dunks => "1"}
         }]
-    }
-  },
- {:away => 
+    },
+ :away => 
     {:team_name => "Charlotte Hornets", :colors => ["Turquoise", "Purple"],:players => [
         {"Jeff Adrien" => 
            {:number => "4",:shoe => "18",:points => "10",:rebounds => "1",:assists => "1",:steals => "2",:blocks => "7",:slam_dunks => "2"}
@@ -35,10 +36,24 @@ game_hash = {
         {"Brendan Haywood" => 
            {:number => "33",:shoe => "15",:points => "6",:rebounds => "12",:assists => "12",:steals => "22",:blocks => "5",:slam_dunks => "12"}
         }]
-    }]
+    }
 }
+end
 
-
+def num_points_scored(name)
+  game_hash.each do |team, attributes|
+    attributes.each do |attribute, players|
+      players.each do |player, stats|
+        binding.pry 
+        stats.each do |points|
+          if points == :points
+            return stats[points]
+          end
+        end
+      end
+    end
+  end
+end
 
 
 
