@@ -210,6 +210,10 @@ def long_name_steals_a_ton?
   longest_name = ""
   player_steals = 0
   steals_array = []
+  answer = nil
+  top_steals = 0 
+  top_stealer = ""
+  
   game_hash.each do |location, details|
     details.each do |team_info, particular|
       if particular.is_a?(String) == false
@@ -217,23 +221,15 @@ def long_name_steals_a_ton?
           particular.each do |player_name, player_details|
           if player_name.length > longest_name.length
             longest_name = player_name
-            player_steals = player_details[:steals]
             end
-          particular.each do |player_name, player_details|
-            if player_name != longest_name
-              steals_array.push(player_details[:steals])
+          if player_details[:steals] > top_steals
+            top_steals = player_details[:steals]
+            top_stealer = player_name
             end
           end
         end
       end
     end
   end
-end
-steals_array.each do |steals|
-  if player_steals < steals
-    false
-  else
-    true 
-  end
-end
+longest_name == top_stealer
 end
