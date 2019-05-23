@@ -57,9 +57,10 @@ def game_hash
       }
     },
 :away => 
-    {:team_name => "Charlotte Hornets", :colors => ["Turquoise", "Purple"],:players => {
+    {:team_name => "Charlotte Hornets", :colors => ["Turquoise", "Purple"],:players => 
+    {
         "Jeff Adrien" => 
-          { number: 4,
+          { number:4,
             shoe: 18,
             points: 10,
             rebounds: 1,
@@ -160,20 +161,79 @@ end
 
       
 def player_stats(name)
-  new_hash = {}
+  answer = {}
   game_hash.each do |location, details|
     details.each do |team_info, particular|
-      if particular == name
-        particular.each do |player|
-          new_hash = particular[name]
+      if particular.is_a?(String) == false
+        if particular.is_a?(Array) == false
+          particular.each do |player_name, player_details|
+           if player_name == name
+            answer = player_details
+          end
+        end
         end
       end
     end
   end
-  new_hash
+  answer
 end
-        
+
+
+def big_shoe_rebounds
+
+biggest_shoe = 0
+resulting_rebounds = 0
+
+game_hash.each do |location, details|
+    details.each do |team_info, particular|
+      if particular.is_a?(String) == false
+        if particular.is_a?(Array) == false
+          particular.each do |player_name, player_details|
+            if player_details[:shoe] > biggest_shoe
+              biggest_shoe = player_details[:shoe]
+              resulting_rebounds = player_details[:rebounds]
+            end
+          end
+        end
+      end
+    end
+  end
+  resulting_rebounds
+end
 
 
 
 
+
+
+def long_name_steals_a_ton?
+  longest_name = ""
+  player_steals = 0
+  steals_array = []
+  game_hash.each do |location, details|
+    details.each do |team_info, particular|
+      if particular.is_a?(String) == false
+        if particular.is_a?(Array) == false
+          particular.each do |player_name, player_details|
+          if player_name.length > longest_name.length
+            longest_name = player_name
+            player_steals = player_details[:steals]
+            end
+          particular.each do |player_name, player_details|
+            if player_name != longest_name
+              steals_array.push(player_details[:steals])
+            end
+          end
+        end
+      end
+    end
+  end
+end
+steals_array.each do |steals|
+  if player_steals < steals
+    false
+  else
+    true 
+  end
+end
+end
