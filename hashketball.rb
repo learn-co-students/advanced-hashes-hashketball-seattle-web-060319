@@ -1,10 +1,11 @@
 require 'pry'
-game_hash = {
+def game_hash 
+ hash = {
   :home=>{
     :team_name=>"Brooklyn Nets",
-    :colors=>"Black,White",
+    :colors=>["Black", "White"],
     :players=>{
-       "Alan Anderson"=>{
+        "Alan Anderson"=>{
         :number=>0,
         :shoe=>16,
         :points=>22,
@@ -13,7 +14,7 @@ game_hash = {
         :steals=>3,
         :blocks=>1,
         :slam_dunks=>1
-      },
+      }, 
       "Reggie Evans"=>{
         :number=>30,
         :shoe=>14,
@@ -23,7 +24,7 @@ game_hash = {
         :steals=>12,
         :blocks=>12,
         :slam_dunks=>7
-      },
+       }, 
        "Brook Lopez"=>{
         :number=>11,
         :shoe=>17,
@@ -33,7 +34,7 @@ game_hash = {
         :steals=>3,
         :blocks=>1,
         :slam_dunks=>15
-      },
+       },
        "Mason Plumlee"=>{
         :number=>1,
         :shoe=>19,
@@ -43,8 +44,8 @@ game_hash = {
         :steals=>3,
         :blocks=>8,
         :slam_dunks=>5
-      },
-      "Jason Terry"=>{
+       }, 
+       "Jason Terry"=>{
         :number=>31,
         :shoe=>15,
         :points=>19,
@@ -53,14 +54,14 @@ game_hash = {
         :steals=>4,
         :blocks=>11,
         :slam_dunks=>1
-      },
-    },
-  },
+       },
+     },
+   },
   :away=>{
-    :teamname=>"Charlotte Hornets",
-    :colors=>"Turquoise,Purple",
+    :team_name=>"Charlotte Hornets",
+    :colors=>["Turquoise", "Purple"],
     :players=>{
-      "Jeff Adrien"=>{
+     "Jeff Adrien"=>{
         :number=>4,
         :shoe=>18,
         :points=>10,
@@ -69,8 +70,8 @@ game_hash = {
         :steals=>2,
         :blocks=>7,
         :slam_dunks=>2
-      },
-      "Bismack Biyombo"=>{
+      }, 
+     "Bismack Biyombo"=>{
         :number=>0,
         :shoe=>16,
         :points=>12,
@@ -79,8 +80,8 @@ game_hash = {
         :steals=>7,
         :blocks=>15,
         :slam_dunks=>10
-      },
-       "DeSagna Diop"=>{
+      }, 
+      "DeSagna Diop"=>{
         :number=>2,
         :shoe=>14,
         :points=>24,
@@ -89,8 +90,8 @@ game_hash = {
         :steals=>4,
         :blocks=>5,
         :slam_dunks=>5
-      },
-       "Ben Gordon"=>{
+      }, 
+      "Ben Gordon"=>{
         :number=>8,
         :shoe=>15,
         :points=>33,
@@ -99,7 +100,7 @@ game_hash = {
         :steals=>1,
         :blocks=>1,
         :slam_dunks=>0
-      },
+      }, 
       "Brendan Haywood"=>{
         :number=>33,
         :shoe=>15,
@@ -113,27 +114,34 @@ game_hash = {
     },
   },
 }
+end
 
-def good_practices
-      binding.pry
-  game_hash.each do |location, team_data|
-    #are you ABSOLUTELY SURE what 'location' and 'team data' are? use binding.pry to find out!
-      team_data.each do |attribute, data|
-        #are you ABSOLUTELY SURE what 'attribute' and 'team data' are? use binding.pry to find out!
- 
-        #what is 'data' at each loop through out .each block? when will the following line of code work and when will it break?
-        data.each do |data_item|
+def num_points_scored(name)
+  game_hash.each do |team, team_data|
+    team_data[:players].each do |player_name,data_hash|
+     if player_name == name
+      return data_hash[:points]
+     end
+    end
+  end
+end
+
+def shoe_size(name)
+  game_hash.each do |team, team_data|
+    team_data[:players].each do |player_name, data_hash|
+      if player_name == name
+        return data_hash[:shoe]
       end
     end
   end
 end
-  
 
-
-
-
-
-
-
+def team_colors(team)
+  game_hash.each do |teams, team_data|
+    if team_data[:team_name] == team 
+    return team_data[:colors]
+    end
+  end
+end
 
 
