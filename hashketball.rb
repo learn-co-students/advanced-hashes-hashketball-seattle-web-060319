@@ -136,12 +136,61 @@ def shoe_size(name)
   end
 end
 
-def team_colors(team)
+def team_colors(color)
   game_hash.each do |teams, team_data|
-    if team_data[:team_name] == team 
+    if team_data[:team_name] == color 
     return team_data[:colors]
     end
   end
 end
 
+def team_names
+ array = []
+   game_hash.each do |team,data_hash|
+      data_hash.each do|data_key, name|
+    if name.is_a? String
+    array << name
+        end
+      end
+   end
+       return array
+end
+  
+def player_numbers(team_name)
+    result = []
+    game_hash.each do |origin, team|
+        team[:players].each do |name, stats| 
+            if team[:team_name] == team_name
+                result << team[:players][name][:number]
+            end
+        end
+    end
+    return result
+end
+
+def player_stats(player_name)
+    game_hash.each do |origin, team|
+      stats = team[:players][player_name]
+      if stats # If not empty. Why does this have to be checked? If this line is commented out I get nil.
+          return stats
+      end
+    end
+end
+
+def big_shoe_rebounds
+    largest_shoe = 0
+    rebounds = 0
+    player = ""
+    game_hash.each do |origin, team|
+        team[:players].each do |name, stats|
+            if largest_shoe < shoe_size(name)
+                largest_shoe = shoe_size(name)
+                player = name
+            end
+        end
+    end
+    return player_stats(player)[:rebounds]
+end
+
+      
 
