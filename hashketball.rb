@@ -194,10 +194,11 @@ end
 
 def big_shoe_rebounds
 #returns the number of rebounds with the player that has the largest shoe size
+
 	shoes = []
 	rebounds = []
 	
-#gets values of stats across teams
+	#gets values of stats across teams
 	game_hash.each_value do |team_data_hash|
 		team_data_hash[:players].each_value do |stats_hash|
 			shoes << stats_hash[:shoe]
@@ -205,14 +206,92 @@ def big_shoe_rebounds
 		end
 	end
 
-#finds max shoe size
+	#finds max shoe size
 	i = shoes.index { |x| x == shoes.max}
 
-#return corresponding rebounds number
+	#return corresponding rebounds number
 	return rebounds[i]
-	
-end 
 
+end
+
+def most_points_scored
+#returns the player name who has the most points
+	points = []
+	names = []
+
+	game_hash.each_value do |team_data_hash|
+		team_data_hash[:players].each do |player_name, stats_hash|
+			points << stats_hash[:points]
+			names << player_name
+		end
+	end
+
+	#finds max points
+	i = points.index { |x| x == points.max}
+
+	#return corresponding player name
+	return names[i]
+end
+
+def winning_team
+#returns the team name with the most points
+	pts = []
+	teams = [];
+
+	game_hash.each do |team, data_hash|
+		tally = 0
+		data_hash[:players].each_value do |stats_hash|
+			tally += stats_hash[:points]
+		end
+		teams << game_hash[team][:team_name]
+		pts << tally
+	end
+
+	#finds max points
+	i = pts.index { |x| x == pts.max}
+
+	#return corresponding team name
+	return teams[i]
+end
+
+
+def player_with_longest_name
+#returns the player name that is the longest
+	longest_name = ""
+
+	game_hash.each_value do |data_hash|
+		names = data_hash[:players].keys
+		names.each do |x|
+			if x.length >= longest_name.length 
+				#overwrites bismack biyombo, which also has a length of 15
+				longest_name = x
+			end
+		end
+	end
+	return longest_name
+end
+
+def long_name_steals_a_ton?
+#returns true if the player with the longest name had the most steals
+	longest_name = player_with_longest_name
+
+	steals = []
+	names = []
+
+	game_hash.each_value do |team_data_hash|
+		team_data_hash[:players].each do |player_name, stats_hash|
+			steals << stats_hash[:steals]
+			names << player_name
+		end
+	end
+
+	#finds max steals
+	i = steals.index { |x| x == steals.max}
+
+	#return corresponding player name
+	names[i] == longest_name
+
+end
 
 # game_hash
 # binding.pry
