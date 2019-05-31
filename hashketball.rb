@@ -50,17 +50,28 @@ end
 
 def team_names
   array = []
-  team_array = game_hash[:away].merge(game_hash[:home])
-  team_team = team_array.fetch(:team_name)
-  array << team_team
+  array << game_hash[:away][:home]
+  return array
 end
 
 
-def player_numbers()
+def player_numbers(name)
+  jerseys = []
+  game_hash.each do |location, team_data|
+    if team_data[:team_name] == name
+      player_number = team_data[:numbers]
+    end
+  end
 end
 
-def player_stats()
+def player_stats(name)
+  game_hash.each do |location, team_data|
+    if team_data[:players] == name
+      return game_hash[:players].values 
+    end
+  end
 end
 
 def big_shoe_rebounds()
+
 end
