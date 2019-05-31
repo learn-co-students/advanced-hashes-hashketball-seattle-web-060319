@@ -48,14 +48,13 @@ def team_colors(name)
   end
 end
 
-def team_names(name)
-  game_hash.each do |location, team_data|
-    return team_data[:team_name]
-    end
-  end
+def team_names
+  array = []
+  team_array = game_hash[:away].merge(game_hash[:home])
+  team_team = team_array.fetch(:team_name)
+  array << team_team
 end
 
-end
 
 def player_numbers()
 end
