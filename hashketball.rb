@@ -20,7 +20,7 @@ def game_hash
         :players => {
           "Jeff Adrien" => {:number => 4, :shoe => 18, :points => 10, :rebounds => 1, :assists => 1, :steals => 2, :blocks => 7, :slam_dunks => 2},
           "Bismack Biyombo" => {:number => 0, :shoe => 16, :points => 12, :rebounds => 4, :assists => 7, :steals => 7, :blocks => 15, :slam_dunks => 10},
-          "DeSagna Diop" => {:number => 12, :shoe => 14, :points => 24, :rebounds => 12, :assists => 12, :steals => 4, :blocks => 5, :slam_dunks => 5},
+          "DeSagna Diop" => {:number => 2, :shoe => 14, :points => 24, :rebounds => 12, :assists => 12, :steals => 4, :blocks => 5, :slam_dunks => 5},
           "Ben Gordon" => {:number => 8, :shoe => 15, :points => 33, :rebounds => 3, :assists => 2, :steals => 1, :blocks => 1, :slam_dunks => 0},
           "Brendan Haywood" => {:number => 33, :shoe => 15, :points => 6, :rebounds => 12, :assists => 12, :steals => 22, :blocks => 5, :slam_dunks => 12}
           }
@@ -41,7 +41,7 @@ def shoe_size(name)
 end
 
 def team_colors(name)
-  game_hash.each do |location, team_data|
+  game_hash.each do |location,team_data|
     if team_data[:team_name] == name
       return team_data[:colors]
     end
@@ -49,29 +49,45 @@ def team_colors(name)
 end
 
 def team_names
-  array = []
-  array << game_hash[:away][:home]
-  return array
+  game_hash.collect do |location,team_data|
+    team_data[:team_name]
+  end
 end
 
 
 def player_numbers(name)
-  jerseys = []
-  game_hash.each do |location, team_data|
+  array = []
+  game_hash.each do |location,team_data|
     if team_data[:team_name] == name
-      player_number = team_data[:numbers]
-    end
+      team_data[:players].each do |attribute,info|
+      array << info[:number]
+   end
   end
+ end
+ array
 end
 
 def player_stats(name)
-  game_hash.each do |location, team_data|
-    if team_data[:players] == name
-      return game_hash[:players].values 
-    end
-  end
+ game_hash.each do |location, team_data|
+     team_data[:players].each do |attribute,info|
+       if attribute == name
+      return info
+     end
+   end
+ end
 end
 
-def big_shoe_rebounds()
-
+def big_shoe_rebounds
+  shoe = 0
+  rebounds = 0
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |attribute,info|
+      if info[:shoe] > shoe
+          player_shoe = info[:shoe]
+          rebounds = info[:rebounds]
+          #binding.pry
+      end
+    end
+  end
+  rebounds
 end
