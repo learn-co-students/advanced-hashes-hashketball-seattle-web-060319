@@ -48,6 +48,7 @@ def team_colors(color)
 end
 
 def team_names()
+
 end
 
 def player_numbers()
