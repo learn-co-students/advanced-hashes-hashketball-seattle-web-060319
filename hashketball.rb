@@ -40,11 +40,12 @@ def shoe_size(name)
   player_hash.fetch(:shoe)
 end
 
-def team_colors(color)
-  array = []
-  coloring = game_hash[:away].merge(game_hash[:home])
-  array << coloring.fetch(:colors).flatten
-
+def team_colors(name)
+  game_hash.each do |location, team_data|
+    if team_data[:colors].each == name
+      return team_data[:colors]
+    end
+  end
 end
 
 def team_names()
