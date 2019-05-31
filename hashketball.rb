@@ -41,17 +41,18 @@ def shoe_size(name)
 end
 
 def team_colors(name)
-  game_hash.map do |location, team_data|
-    team_data.map do |attribute, info|
-      if attribute.include?(:colors)
-        puts game_hash[loction][:colors]
+  color_array = []
+  game_hash.each do |location, team_data|
+      if team_data[:colors] == name
+        color_array << team_data[:colors].flatten
       #binding.pry
       end
     end
   end
 end
 
-def team_names()
+def team_names(name)
+
 end
 
 def player_numbers()
